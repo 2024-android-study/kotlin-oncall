@@ -1,0 +1,24 @@
+package oncall.domain
+
+enum class Holiday(val month: Int, val day: Int) {
+    NEW_DAY(1, 1),
+    INDEPENDENCE_MOVEMENT_DAY(3, 1),
+    CHILDREN_DAY(5, 5),
+    MEMORIAL_DAY(6, 6),
+    NATIONAL_LIBERATION_DAY(8, 15),
+    NATIONAL_FOUNDATION_DAY(10, 3),
+    HANGUL_DAY(10, 9),
+    CHRISTMAS(12, 25);
+
+    companion object {
+        fun isHoliday(month: Int, day: Int): Boolean {
+            entries.forEach {
+                if (it.month == month && it.day == day) {
+                    return true
+                }
+            }
+
+            return false
+        }
+    }
+}
