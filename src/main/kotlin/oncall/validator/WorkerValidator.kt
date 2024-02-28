@@ -22,7 +22,7 @@ enum class WorkerValidator(val message: String) {
 
         fun validateName(nameList: List<String>) {
             val error = when {
-                !nameList.all { it.length <= 5 } -> INVALID_NAME
+                !nameList.all { it.length <= NumConstant.NAME_LENGTH } -> INVALID_NAME
                 nameList.size != nameList.toSet().size -> INVALID_NAME
                 nameList.size !in (NumConstant.MIN_WORKER_CNT .. NumConstant.MAX_WORKER_CNT) -> INVALID_NAME
                 else -> return

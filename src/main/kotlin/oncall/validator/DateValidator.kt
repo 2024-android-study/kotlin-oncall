@@ -17,7 +17,7 @@ enum class DateValidator(val message: String) {
                 input.contains(",").not() -> INVALID_DATE
                 input.split(",")[0].matches(Regex("^\\d+$")).not() -> NOT_NUMBER
                 input.split(",")[0].toInt() !in (NumConstant.MONTH_FIRST..NumConstant.MONTH_LAST) -> INVALID_DATE
-                input.split(",")[1] !in DayOfWeek.DAYS.day -> INVALID_DATE
+                input.split(",")[1] !in DayOfWeek.days -> INVALID_DATE
                 else -> return
             }
 
