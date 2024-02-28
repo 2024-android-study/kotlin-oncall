@@ -1,6 +1,9 @@
 package oncall.view
 
 import camp.nextstep.edu.missionutils.Console
+import oncall.constant.ViewConst.INPUT_MONTH_AND_DAY
+import oncall.constant.ViewConst.INPUT_WEEKDAY
+import oncall.constant.ViewConst.INPUT_WEEKEND
 import oncall.model.WorkOrder
 import oncall.validation.MonthAndDayValidator
 import oncall.validation.WorkerValidator
@@ -9,7 +12,7 @@ class InputView {
     fun getMonthAndDay(): List<String> {
         while(true) {
             try {
-                print(MONTH_AND_DAY)
+                print(INPUT_MONTH_AND_DAY)
                 val input = Console.readLine()
                 MonthAndDayValidator.validateMonthAndDay(input)
                 return input.split(",")
@@ -25,9 +28,9 @@ class InputView {
         val order = WorkOrder(listOf(), listOf())
         while(true) {
             try {
-                print(WEEKDAY)
+                print(INPUT_WEEKDAY)
                 order.weekday = getWeekdayWorker()
-                print(WEEKEND)
+                print(INPUT_WEEKEND)
                 order.weekend = getWeekendWorker()
                 WorkerValidator.isSameWorkers(order)
                 return order
@@ -38,22 +41,18 @@ class InputView {
         }
     }
     private fun getWeekdayWorker(): List<String> {
-        print(WEEKDAY)
+        print(INPUT_WEEKDAY)
         val input = Console.readLine().split(",")
         WorkerValidator.validateWorker(input)
         return input
     }
 
     private fun getWeekendWorker(): List<String> {
-        print(WEEKEND)
+        print(INPUT_WEEKEND)
         val input = Console.readLine().split(",")
         WorkerValidator.validateWorker(input)
         return input
     }
 
-    companion object {
-        const val MONTH_AND_DAY = "비상 근무를 배정할 월과 시작 요일을 입력하세요> "
-        const val WEEKDAY = "평일 비상 근무 순번대로 사원 닉네임을 입력하세요> "
-        const val WEEKEND = "비상 근무를 배정할 월과 시작 요일을 입력하세요> "
-    }
+
 }
