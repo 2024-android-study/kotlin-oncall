@@ -1,7 +1,7 @@
 package oncall.model
 
 class Employee(
-    private val name: String,
+    val name: String,
 ) {
 
     fun isWorkingContinuouslyWeekdays(date: Int, nextDate: Int): Boolean {
