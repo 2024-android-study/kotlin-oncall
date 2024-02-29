@@ -5,7 +5,7 @@ enum class MonthAndDayValidator(val message: String) {
     companion object {
         private const val REGEX = """^(1[0-2]|[1-9]),(일|월|화|수|목|금|토)$"""
         fun validateMonthAndDay(input: String) {
-            require(REGEX.toRegex().matches(input)) { INVALID_FORMAT }
+            require(REGEX.toRegex().matches(input)) { INVALID_FORMAT.message }
         }
 
     }

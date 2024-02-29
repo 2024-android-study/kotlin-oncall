@@ -1,6 +1,6 @@
 package oncall.validation
 
-import oncall.model.WorkOrder
+import oncall.model.schedule.WorkOrder
 
 enum class WorkerValidator(val message: String) {
     OUT_OF_RANGE("[ERROR] 최소 5명, 최대 35명의 근무자가 필요합니다. 다시 입력해 주세요."),
@@ -16,15 +16,15 @@ enum class WorkerValidator(val message: String) {
             val error = when {
                 input.size !in MIN_WORKER..MAX_WORKER -> OUT_OF_RANGE
                 input.toSet().size != input.size -> DUPLICATE
-                input.all { it.length > MAX_NICKNAME_LENGTH } -> TOO_LONG
+                input.any { it.length > MAX_NICKNAME_LENGTH } -> TOO_LONG
                 else -> return
             }
             throw IllegalArgumentException(error.message)
         }
 
         fun isSameWorkers(order: WorkOrder) {
-            require(order.weekday.toSet() == order.weekend.toSet())
-            { NOT_SAME_WORKERS }
+            require(order.weekday.toSet() == order.holiday.toSet())
+            { NOT_SAME_WORKERS.message }
         }
 
     }

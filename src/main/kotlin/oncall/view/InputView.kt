@@ -1,10 +1,10 @@
 package oncall.view
 
 import camp.nextstep.edu.missionutils.Console
+import oncall.constant.ViewConst.INPUT_HOLIDAY
 import oncall.constant.ViewConst.INPUT_MONTH_AND_DAY
 import oncall.constant.ViewConst.INPUT_WEEKDAY
-import oncall.constant.ViewConst.INPUT_WEEKEND
-import oncall.model.WorkOrder
+import oncall.model.schedule.WorkOrder
 import oncall.validation.MonthAndDayValidator
 import oncall.validation.WorkerValidator
 
@@ -17,7 +17,7 @@ class InputView {
                 MonthAndDayValidator.validateMonthAndDay(input)
                 return input.split(",")
             } catch (e: IllegalArgumentException) {
-                println(e)
+                println(e.message)
             }
 
         }
@@ -25,33 +25,31 @@ class InputView {
     }
 
     fun getWorker(): WorkOrder {
-        val order = WorkOrder(listOf(), listOf())
+        val order = WorkOrder(mutableListOf(), mutableListOf())
         while(true) {
             try {
-                print(INPUT_WEEKDAY)
                 order.weekday = getWeekdayWorker()
-                print(INPUT_WEEKEND)
-                order.weekend = getWeekendWorker()
+                order.holiday = getHolidayWorker()
                 WorkerValidator.isSameWorkers(order)
                 return order
             } catch (e: IllegalArgumentException) {
-                println(e)
+                println(e.message)
             }
 
         }
     }
-    private fun getWeekdayWorker(): List<String> {
+    private fun getWeekdayWorker(): MutableList<String> {
         print(INPUT_WEEKDAY)
         val input = Console.readLine().split(",")
         WorkerValidator.validateWorker(input)
-        return input
+        return input.toMutableList()
     }
 
-    private fun getWeekendWorker(): List<String> {
-        print(INPUT_WEEKEND)
+    private fun getHolidayWorker(): MutableList<String> {
+        print(INPUT_HOLIDAY)
         val input = Console.readLine().split(",")
         WorkerValidator.validateWorker(input)
-        return input
+        return input.toMutableList()
     }
 
 
