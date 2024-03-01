@@ -7,5 +7,6 @@ class OncallApp {
 
     fun run() {
         val start = inputView.readMonthAndStartDay()
+        val weekDayWorker = inputView.readWeekDayWorker()
     }
 }
