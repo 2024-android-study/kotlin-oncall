@@ -3,7 +3,7 @@ package oncall.service
 import oncall.config.Day
 
 object InputConverter {
-    private val DELIMINATOR = ","
+    private const val DELIMINATOR = ","
 
     fun splitByComma(str: String): List<String> {
         return str.split(DELIMINATOR)
