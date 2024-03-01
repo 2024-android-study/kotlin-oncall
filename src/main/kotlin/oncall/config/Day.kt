@@ -1,7 +1,5 @@
 package oncall.config
 
-import java.time.DayOfWeek
-
 enum class Day(val day: String) {
     SUN("일"),
     MON("월"),
@@ -23,6 +21,16 @@ enum class Day(val day: String) {
                 }
             }
             return null
+        }
+
+        fun findDayList(startDay: Day): List<Day> {
+            val list = Day.entries.toList()
+            val startIndex = list.indexOf(startDay)
+            return list.subList(startIndex, list.size) + list.subList(0, startIndex)
+        }
+
+        fun isWeekend(day: Day): Boolean {
+            return (day == Day.SAT || day == Day.SUN)
         }
     }
 }
